@@ -1,2 +1,2 @@
-# Wox.Plugin.ncTweet
+# Wox.Plugin.SwiftTweet
 Twitter Plugin for Wox
