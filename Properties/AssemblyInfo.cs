@@ -2,28 +2,35 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("Wox.Plugin.ncTweet")]
+// Allgemeine Informationen über eine Assembly werden über die folgenden 
+// Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
+// die einer Assembly zugeordnet sind.
+[assembly: AssemblyTitle("Wox.Plugin.SwiftTweet")]
 [assembly: AssemblyDescription("Twitter Plugin for Wox")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Wox.Plugin.ncTweet")]
+[assembly: AssemblyProduct("Wox.Plugin.SwiftTweet")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Version information for an assembly consists of the following four values:
+// Durch Festlegen von ComVisible auf "false" werden die Typen in dieser Assembly unsichtbar 
+// für COM-Komponenten.  Wenn Sie auf einen Typ in dieser Assembly von 
+// COM aus zugreifen müssen, sollten Sie das ComVisible-Attribut für diesen Typ auf "True" festlegen.
+[assembly: ComVisible(false)]
+
+// Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
+[assembly: Guid("f34c5337-2a7e-4c2e-b718-116e7e5ab091")]
+
+// Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
-//      Major Version
-//      Minor Version 
-//      Build Number
+//      Hauptversion
+//      Nebenversion 
+//      Buildnummer
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
+// Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
+// übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: ComVisible(false)]
+[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
