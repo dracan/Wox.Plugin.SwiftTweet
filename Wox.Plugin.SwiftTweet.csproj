@@ -56,7 +56,7 @@
     </Reference>
     <Reference Include="TWHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7666e1fb4f869677, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TWHelper\TWHelper\bin\Release\TWHelper.dll</HintPath>
+      <HintPath>External DLLs\TWHelper.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Wox.Infrastructure">
@@ -111,6 +111,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="External DLLs\Hammock.ClientProfile.dll" />
+    <Content Include="External DLLs\Newtonsoft.Json.dll" />
+    <Content Include="External DLLs\NLog.dll" />
+    <Content Include="External DLLs\TweetSharp.dll" />
+    <Content Include="External DLLs\TWHelper.dll" />
+    <Content Include="External DLLs\Wox.Infrastructure.dll" />
+    <Content Include="External DLLs\Wox.Plugin.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
