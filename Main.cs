@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using TweetSharp;
 
 namespace Wox.Plugin.SwiftTweet
 {
     public class Main : IPlugin, ISettingProvider
     {
         private Twitter twitter;
-        public const string twitterIconPath = "Resources\\TwitterLogo_#55acee.png";
+        private const string twitterIconPath = "Resources\\TwitterLogo_#55acee.png";
+        private enum validCommands
+        {
+            tweet = 1,
+            search = 2
+        } 
 
         #region "Prerequisites"
         public void Init(PluginInitContext context)
@@ -70,10 +76,13 @@ namespace Wox.Plugin.SwiftTweet
         /// <returns></returns>
         public List<Result> Query(Query query)
         {
-            List<Result> results = new List<Result>();
+            List<Result> results;
             Result result;
+            validCommands command;
+            bool isValidCommand;
             try
             {
+                results = new List<Result>();
                 if (twitter == null)
                 {
                     getTwitterAccess();
@@ -82,10 +91,37 @@ namespace Wox.Plugin.SwiftTweet
                 // Start building results
                 if (twitter != null)
                 {
-                    if (query.Search.Length <= 140)
+                    // Check for valid command --> see enum "validCommands"
+                    isValidCommand = System.Enum.IsDefined(typeof(validCommands), query.FirstSearch);
+                    if (isValidCommand == true)
                     {
-                        results.Add(buildTweetResult(query.Search)); // Tweet
+                        command = (validCommands)System.Enum.Parse(typeof(validCommands), query.FirstSearch, true);
+                        switch (command)
+                        {
+                            case validCommands.tweet:
+                                if (query.SecondToEndSearch.Length <= 140)
+                                {
+                                    results.Add(buildTweetResult(query.SecondToEndSearch)); // Tweet
+                                }
+                                break;
+
+                            case validCommands.search:
+                                if (query.SecondToEndSearch.Length > 0)
+                                {
+                                    results = buildSearchResult(query.SecondToEndSearch); // Search for tweets
+                                }
+                                break;
+                            default:
+
+                                break;
+                        }
                     }
+                    else
+                    {
+                        // No valid command
+                        result = new Result("Twitter commands: " + getConcValidCommands(), twitterIconPath, "Use one of the following commands: " + getConcValidCommands());
+                        results.Add(result);
+                    }                     
                 }
                 else
                 {
@@ -107,7 +143,7 @@ namespace Wox.Plugin.SwiftTweet
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        private Result buildTweetResult(string query)
+        protected Result buildTweetResult(string query)
         {
             Result result;
             try
@@ -115,7 +151,7 @@ namespace Wox.Plugin.SwiftTweet
                 result = new Result
                 {
                     IcoPath = twitterIconPath,
-                    Title = "Publish tweet",
+                    Title = "Send tweet",
                     SubTitle = "Tweet \"" + query + "\"",
                     Action = (c) =>
                     {
@@ -129,6 +165,76 @@ namespace Wox.Plugin.SwiftTweet
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Return result entries for twitter search
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        protected List<Result> buildSearchResult(string query)
+        {
+            Result result;
+            List<Result> results;
+            IEnumerable<TwitterStatus> searchResults;
+            string text;
+            try
+            {
+                results = new List<Result>();
+                searchResults = twitter.search(query);
+                if (searchResults != null)
+                {
+                    foreach (TwitterStatus twitterStatus in searchResults)
+                    {
+                        text = twitterStatus.Text.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+                        result = new Result
+                        {
+                            IcoPath = twitterIconPath,
+                            Title = text,
+                            SubTitle = twitterStatus.User.Name + " | @" + twitterStatus.User.ScreenName + " | " + twitterStatus.CreatedDate.ToString()
+                            /*Action = (c) =>
+                            {
+                                return twitter.openTweet(twitterStatus.Id);
+                            }*/
+                        };
+
+                        results.Add(result);
+                    }
+                }
+
+                return results;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Return one string with all valid twitter commands
+        /// </summary>
+        /// <returns></returns>
+        protected string getConcValidCommands()
+        {
+            Array enumValues;
+            string concCommands;
+            try
+            {
+                concCommands = "";
+                enumValues = Enum.GetValues(typeof(validCommands));
+                foreach (var value in enumValues)
+                {
+                    concCommands += value.ToString() + " | ";
+                }
+
+                if (concCommands.Length > 3)
+                {
+                    concCommands = concCommands.Remove(concCommands.Length - 3, 3);
+                }
+
+                return concCommands;
+            }
+            catch (Exception){throw;}
         }
         #endregion
 

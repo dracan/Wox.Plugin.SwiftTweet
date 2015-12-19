@@ -151,5 +151,37 @@ namespace Wox.Plugin.SwiftTweet
                 throw;
             }
         }
+
+        /// <summary>
+        /// Search for tweets
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public IEnumerable<TwitterStatus> search(string query)
+        {
+            SearchOptions options;
+            TwitterSearchResult searchResult;
+            IEnumerable<TwitterStatus> results = null;
+            try
+            {
+                if (service != null)
+                {
+                    options = new SearchOptions();
+                    options.Q = query;
+                    options.Count = 30;
+                    searchResult = service.Search(options);
+                    if (searchResult != null)
+                    {
+                        results = searchResult.Statuses;
+                    }
+                }
+
+                return results;               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
