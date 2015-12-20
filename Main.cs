@@ -11,6 +11,7 @@ namespace Wox.Plugin.SwiftTweet
     {
         private Twitter twitter;
         private const string twitterIconPath = "Resources\\TwitterLogo_#55acee.png";
+        private const int splitTweetPos = 80;
         private enum validCommands
         {
             tweet = 1,
@@ -39,8 +40,8 @@ namespace Wox.Plugin.SwiftTweet
                 if (twitter == null)
                 {
                     // Get saved token to perform Twitter access
-                    accessToken = Properties.Settings.Default.accessToken;
-                    accessTokenSecret = Properties.Settings.Default.accessTokenSecret;
+                    accessToken = Settings.getAccessToken();
+                    accessTokenSecret = Settings.getAccessTokenSecret();
                     if (string.IsNullOrEmpty(accessToken) == false && string.IsNullOrEmpty(accessTokenSecret) == false)
                     {
                         twitter = new Twitter(accessToken, accessTokenSecret);
@@ -178,24 +179,35 @@ namespace Wox.Plugin.SwiftTweet
             List<Result> results;
             IEnumerable<TwitterStatus> searchResults;
             string text;
+            string textEnd;
             try
             {
                 results = new List<Result>();
+                // execute search
                 searchResults = twitter.search(query);
                 if (searchResults != null)
                 {
+                    // process results
                     foreach (TwitterStatus twitterStatus in searchResults)
                     {
                         text = twitterStatus.Text.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+                        textEnd = "";
+                        if (text.Length > splitTweetPos)
+                        {
+                            textEnd = text.Substring(splitTweetPos);
+                            textEnd += "\t\t";
+                            text = text.Substring(0, splitTweetPos);
+                        }
+                        // build up the result entry
                         result = new Result
                         {
                             IcoPath = twitterIconPath,
                             Title = text,
-                            SubTitle = twitterStatus.User.Name + " | @" + twitterStatus.User.ScreenName + " | " + twitterStatus.CreatedDate.ToString()
-                            /*Action = (c) =>
+                            SubTitle = textEnd + twitterStatus.User.Name + " | @" + twitterStatus.User.ScreenName + " | " + twitterStatus.CreatedDate.ToString(),
+                            Action = (c) =>
                             {
-                                return twitter.openTweet(twitterStatus.Id);
-                            }*/
+                                return twitter.openTweet(twitterStatus.IdStr);
+                            }
                         };
 
                         results.Add(result);

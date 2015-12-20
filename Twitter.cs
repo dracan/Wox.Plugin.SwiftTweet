@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using TweetSharp;
 using TWHelper;
+using System.Diagnostics;
 
 namespace Wox.Plugin.SwiftTweet
 {
     class Twitter
     {
-        public TwitterService service;
-        public Authentication auth;
+        private TwitterService service;
+        private Authentication auth;
+        private const string tweetUrl = "http://twitter.com/statuses/";
 
         /// <summary>
         /// Used to authorize with already existing accessToken (Twitter access already granted)
@@ -177,6 +179,33 @@ namespace Wox.Plugin.SwiftTweet
                 }
 
                 return results;               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Opens a tweet in the default browser using the status id
+        /// </summary>
+        /// <param name="tweetId"></param>
+        /// <returns></returns>
+        public bool openTweet(string tweetId)
+        {
+            bool success;
+            string url;
+            try
+            {
+                success = false;
+                if (string.IsNullOrEmpty(tweetId) == false)
+                {
+                    url = tweetUrl + tweetId;
+                    Process.Start(url);
+                    success = true;
+                }
+                                
+                return success;
             }
             catch (Exception)
             {

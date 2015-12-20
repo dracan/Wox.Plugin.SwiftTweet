@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DBTek.Crypto, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DBTek.Crypto.2.1.0\lib\net35\DBTek.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <HintPath>packages\TweetMoaSharp.3.0.0.12\lib\3.5\Hammock.ClientProfile.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +84,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Twitter.cs" />
     <Compile Include="frmSettings.xaml.cs">
       <DependentUpon>frmSettings.xaml</DependentUpon>
@@ -113,6 +118,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="External DLLs\DBTek.Crypto.dll" />
     <Content Include="External DLLs\Hammock.ClientProfile.dll" />
     <Content Include="External DLLs\Newtonsoft.Json.dll" />
     <Content Include="External DLLs\NLog.dll" />

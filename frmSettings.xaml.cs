@@ -73,9 +73,7 @@ namespace Wox.Plugin.SwiftTweet
                     if (accessToken != null)
                     {
                         // Save the access token for later usage
-                        Properties.Settings.Default.accessToken = accessToken.Token;
-                        Properties.Settings.Default.accessTokenSecret = accessToken.TokenSecret;
-                        Properties.Settings.Default.Save();
+                        Settings.saveAccessToken(accessToken.Token, accessToken.TokenSecret);
                         checkTwitterAuth();
                     }
                     else
@@ -103,8 +101,8 @@ namespace Wox.Plugin.SwiftTweet
             {
                 // Set label for authorization status
                 lblAuthStatusValue.Content = "Access not granted";
-                accessToken = Properties.Settings.Default.accessToken;
-                accessTokenSecret = Properties.Settings.Default.accessTokenSecret;
+                accessToken = Settings.getAccessToken();
+                accessTokenSecret = Settings.getAccessTokenSecret();
                 twitter = new Twitter(accessToken, accessTokenSecret);
                 if (twitter != null)
                 {
