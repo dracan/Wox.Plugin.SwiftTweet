@@ -1,0 +1,12 @@
+{
+    "ID":"F34C53372A7E4C2EB718116E7E5AB091",
+    "ActionKeyword":"tw",
+    "Name":"SwiftTweet",
+    "Description":"Twitter Plugin for Wox",
+    "Author":"NCiher, Christian N.",
+    "Version":"1.0",
+    "Language":"csharp",
+    "Website":"http://www.getwox.com/plugin",
+    "IcoPath":"Resources\\TwitterLogo_#55acee.png",
+    "ExecuteFileName":"Wox.Plugin.SwiftTweet.dll" 
+}
