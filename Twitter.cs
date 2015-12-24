@@ -5,6 +5,7 @@ using System.Text;
 using TweetSharp;
 using TWHelper;
 using System.Diagnostics;
+using System.Net;
 
 namespace Wox.Plugin.SwiftTweet
 {
@@ -17,8 +18,8 @@ namespace Wox.Plugin.SwiftTweet
         /// <summary>
         /// Used to authorize with already existing accessToken (Twitter access already granted)
         /// </summary>
-        /// <param name="accessToken"></param>
-        /// <param name="accessTokenSecret"></param>
+        /// <param name="accessToken">Twitter access token</param>
+        /// <param name="accessTokenSecret">Twitter access token secret</param>
         public Twitter(string accessToken, string accessTokenSecret)
         {
             try
@@ -50,9 +51,9 @@ namespace Wox.Plugin.SwiftTweet
 
         #region Authentication
         /// <summary>
-        /// Retrieves the Twitter authorization URL
+        /// Get the Twitter authorization URL
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Twitter authorization url</returns>
         public Uri getAuthorizationUri()
         {
             try
@@ -66,10 +67,10 @@ namespace Wox.Plugin.SwiftTweet
         }
 
         /// <summary>
-        /// Retrieves the access token using the entered Twitter PIN code
+        /// Get the access token using the entered Twitter PIN code
         /// </summary>
-        /// <param name="pin"></param>
-        /// <returns></returns>
+        /// <param name="pin">Twitter PIN provides by the Twitter website using the authorization url</param>
+        /// <returns>Twitter access token</returns>
         public OAuthAccessToken getAccessToken(string pin)
         {
             try
@@ -82,6 +83,11 @@ namespace Wox.Plugin.SwiftTweet
             }
         }
 
+        /// <summary>
+        /// Checks if the Twitter access is available
+        /// </summary>
+        /// <param name="showMessage">True to show a message if the access to Twitter is not available</param>
+        /// <returns>True if the access to Twitter is available otherwise false</returns>
         public bool checkAuthorization(bool showMessage)
         {
             VerifyCredentialsOptions options;
@@ -113,17 +119,16 @@ namespace Wox.Plugin.SwiftTweet
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
         #endregion
 
         /// <summary>
-        /// Send tweet
+        /// Send a tweet
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="text">The content of the tweet</param>
+        /// <returns>True if the tweet was successfully send otherwise false</returns>
         public bool tweet(string text)
         {
             bool success;
@@ -157,8 +162,8 @@ namespace Wox.Plugin.SwiftTweet
         /// <summary>
         /// Search for tweets
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
+        /// <param name="query">The query to search for</param>
+        /// <returns>List of Twitter status (tweets)</returns>
         public IEnumerable<TwitterStatus> search(string query)
         {
             SearchOptions options;
@@ -189,8 +194,8 @@ namespace Wox.Plugin.SwiftTweet
         /// <summary>
         /// Opens a tweet in the default browser using the status id
         /// </summary>
-        /// <param name="tweetId"></param>
-        /// <returns></returns>
+        /// <param name="tweetId">Twitter status (tweet) id</param>
+        /// <returns>True if the tweet was successfully opened otherwise false</returns>
         public bool openTweet(string tweetId)
         {
             bool success;
@@ -210,6 +215,36 @@ namespace Wox.Plugin.SwiftTweet
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Checks if an internet connection is available
+        /// </summary>
+        /// <returns>True if internet is available otherwise false</returns>
+        public static bool checkForInternetConnection()
+        {
+            WebClient client;
+            System.IO.Stream stream;
+            bool connectionAvailable;
+            try
+            {
+                connectionAvailable = false;
+                client = new WebClient();
+                if (client != null)
+                {
+                    stream = client.OpenRead("http://www.google.com");
+                    if (stream != null)
+                    {
+                        connectionAvailable = true;
+                    }
+                }
+
+                return connectionAvailable;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

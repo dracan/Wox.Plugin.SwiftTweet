@@ -8,6 +8,11 @@ namespace Wox.Plugin.SwiftTweet
 {
     class Settings
     {
+        /// <summary>
+        /// Save the Twitter access token. Before saving the token will be encrypted.
+        /// </summary>
+        /// <param name="token">Twitter access token</param>
+        /// <param name="tokenSecret">Twitter access token secret</param>
         public static void saveAccessToken(string token, string tokenSecret)
         {
             TripleDES encoder;
@@ -24,6 +29,10 @@ namespace Wox.Plugin.SwiftTweet
             }
         }
 
+        /// <summary>
+        /// Get the decrypted Twitter access token
+        /// </summary>
+        /// <returns>Decrypted twitter access token</returns>
         public static string getAccessToken()
         {
             TripleDES decoder;
@@ -38,6 +47,10 @@ namespace Wox.Plugin.SwiftTweet
             }
         }
 
+        /// <summary>
+        /// Get the decrypted Twitter access token secret
+        /// </summary>
+        /// <returns>Decrypted twitter access token secret</returns>
         public static string getAccessTokenSecret()
         {
             TripleDES decoder;

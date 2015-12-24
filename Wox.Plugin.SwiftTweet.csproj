@@ -58,7 +58,7 @@
       <HintPath>packages\TweetMoaSharp.3.0.0.12\lib\3.5\TweetSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="TWHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7666e1fb4f869677, processorArchitecture=MSIL">
+    <Reference Include="TWHelper, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7666e1fb4f869677, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>External DLLs\TWHelper.dll</HintPath>
     </Reference>

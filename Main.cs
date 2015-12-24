@@ -31,6 +31,10 @@ namespace Wox.Plugin.SwiftTweet
             }
         }
 
+        /// <summary>
+        /// Initialize the Twitter helper class and get the Twitter access
+        /// </summary>
+        /// <returns>Twitter helper class</returns>
         private Twitter getTwitterAccess()
         {
             string accessToken;
@@ -63,7 +67,7 @@ namespace Wox.Plugin.SwiftTweet
                 }
             }
             catch (Exception)
-            {;
+            {
                 throw;
             }
         }
@@ -72,9 +76,10 @@ namespace Wox.Plugin.SwiftTweet
         #region "Build result list"
         /// <summary>
         /// Get result list
+        /// Sub routines will be called to build the specific results for each command (search, tweet and so on)
         /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
+        /// <param name="query">Query entered by the user in the wox search panel</param>
+        /// <returns>Wox results</returns>
         public List<Result> Query(Query query)
         {
             List<Result> results;
@@ -122,28 +127,37 @@ namespace Wox.Plugin.SwiftTweet
                         // No valid command
                         result = new Result("Twitter commands: " + getConcValidCommands(), twitterIconPath, "Use one of the following commands: " + getConcValidCommands());
                         results.Add(result);
-                    }                     
+                    }                      
                 }
                 else
                 {
-                    // No access
-                    result = new Result("No Twitter access granted", twitterIconPath, "Please grant access to Twitter using the settings panel of wox");
-                    results.Add(result);
+                    if (Twitter.checkForInternetConnection() == false)
+                    {
+                        // No internet connection
+                        result = new Result("No internet connection available", twitterIconPath);
+                        results.Add(result);
+                    }
+                    else
+                    {
+                        // No access
+                        result = new Result("No Twitter access granted", twitterIconPath, "Please grant access to Twitter using the settings panel of wox");
+                        results.Add(result);
+                    }
                 }
+
+                return results;
             }
             catch (Exception)
             {
                 throw;
             }
-
-            return results;
         }
 
         /// <summary>
-        /// Return result entry for sending a tweet
+        /// Get result entries for sending a tweet
         /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
+        /// <param name="query">Query entered by the user in the wox search panel without the keywords</param>
+        /// <returns>Results for sending a tweet</returns>
         protected Result buildTweetResult(string query)
         {
             Result result;
@@ -156,7 +170,7 @@ namespace Wox.Plugin.SwiftTweet
                     SubTitle = "Tweet \"" + query + "\"",
                     Action = (c) =>
                     {
-                        return twitter.tweet(query);
+                        return twitter.tweet(query); // call the helper method to send the tweet
                     }
                 };
 
@@ -169,10 +183,10 @@ namespace Wox.Plugin.SwiftTweet
         }
 
         /// <summary>
-        /// Return result entries for twitter search
+        /// Get results entries for twitter search
         /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
+        /// <param name="query">Query entered by the user in the wox search panel without the keywords</param>
+        /// <returns>Results of the twitter query</returns>
         protected List<Result> buildSearchResult(string query)
         {
             Result result;
@@ -190,14 +204,17 @@ namespace Wox.Plugin.SwiftTweet
                     // process results
                     foreach (TwitterStatus twitterStatus in searchResults)
                     {
-                        text = twitterStatus.Text.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
+                        text = twitterStatus.Text.Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " "); // remove carriege returns and line feeds
                         textEnd = "";
+                        // split the tweet if it's too long to display it completly within the first result line
+                        // the rest of the tweet will be displayed in the subtitle of the wox result list
                         if (text.Length > splitTweetPos)
                         {
                             textEnd = text.Substring(splitTweetPos);
                             textEnd += "\t\t";
                             text = text.Substring(0, splitTweetPos);
                         }
+
                         // build up the result entry
                         result = new Result
                         {
@@ -223,9 +240,9 @@ namespace Wox.Plugin.SwiftTweet
         }
 
         /// <summary>
-        /// Return one string with all valid twitter commands
+        /// Get one string with all valid twitter commands
         /// </summary>
-        /// <returns></returns>
+        /// <returns>String with all valid twitter commands</returns>
         protected string getConcValidCommands()
         {
             Array enumValues;
@@ -253,7 +270,7 @@ namespace Wox.Plugin.SwiftTweet
         /// <summary>
         /// Initialize settings panel
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Settings form</returns>
         public Control CreateSettingPanel()
         {
             return new frmSettings();

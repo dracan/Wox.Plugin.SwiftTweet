@@ -18,13 +18,13 @@ using Wox.Infrastructure.Logger;
 
 namespace Wox.Plugin.SwiftTweet
 {
-    /// <summary>
-    /// Interaktionslogik für frmSettings.xaml
-    /// </summary>
     public partial class frmSettings : UserControl
     {
         private Twitter twitter;
 
+        /// <summary>
+        /// Initilize settings window
+        /// </summary>
         public frmSettings()
         {
             try
@@ -54,32 +54,46 @@ namespace Wox.Plugin.SwiftTweet
             {
                 // Gernerating and opening the Twitter authorization URL
                 twitter = new Twitter();
-                authUrl = twitter.getAuthorizationUri();
-                if (string.IsNullOrEmpty(authUrl.ToString()) == false)
+                if (Twitter.checkForInternetConnection() == true)
                 {
-                    Process.Start(authUrl.ToString());
-                }
-                else
-                {
-                    throw new Exception("Generating Twitter authorization URL failed.");
-                }
-
-                // Get the access token using the entered PIN
-                pin = Interaction.InputBox("Plese enter the twitter authorization PIN code provided by the twitter website.", "Enter Twitter PIN code");
-                if (string.IsNullOrEmpty(pin) == false)
-                {
-                    accessToken = twitter.getAccessToken(pin);
-
-                    if (accessToken != null)
+                    authUrl = twitter.getAuthorizationUri();
+                    if (authUrl != null)
                     {
-                        // Save the access token for later usage
-                        Settings.saveAccessToken(accessToken.Token, accessToken.TokenSecret);
-                        checkTwitterAuth();
+                        if (string.IsNullOrEmpty(authUrl.ToString()) == false)
+                        {
+                            Process.Start(authUrl.ToString());
+                        }
+                        else
+                        {
+                            throw new Exception("Generating Twitter authorization URL failed.");
+                        }
                     }
                     else
                     {
-                        throw new Exception("Generating Twitter access token failed.");
+                        throw new Exception("Generating Twitter authorization URL failed.");
                     }
+
+                    // Get the access token using the entered PIN
+                    pin = Interaction.InputBox("Plese enter the twitter authorization PIN code provided by the twitter website.", "Enter Twitter PIN code");
+                    if (string.IsNullOrEmpty(pin) == false)
+                    {
+                        accessToken = twitter.getAccessToken(pin);
+
+                        if (accessToken != null)
+                        {
+                            // Save the access token for later usage
+                            Settings.saveAccessToken(accessToken.Token, accessToken.TokenSecret);
+                            checkTwitterAuth();
+                        }
+                        else
+                        {
+                            throw new Exception("Generating Twitter access token failed.");
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("No internet connection available.");
                 }
             }
             catch (Exception e)
@@ -113,6 +127,24 @@ namespace Wox.Plugin.SwiftTweet
                         btnAuthorise.IsEnabled = false;
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Opens the project website
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="re"></param>
+        private void txbProjectURL_onRequestNavigate(object sender, RequestNavigateEventArgs re)
+        {
+            try
+            {
+                Process.Start(re.Uri.AbsoluteUri);
             }
             catch (Exception e)
             {
