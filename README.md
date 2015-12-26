@@ -4,7 +4,7 @@ A Twitter Plugin for [Wox](https://github.com/Wox-launcher/Wox)
 Demo
 =========
 
-tbd
+![SwiftTweet demo](http://i.imgur.com/30mTdCK.gif)
 
 Features
 =========
