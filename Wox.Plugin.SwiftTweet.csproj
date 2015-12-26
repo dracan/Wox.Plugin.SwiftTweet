@@ -126,8 +126,6 @@
     <Content Include="External DLLs\TWHelper.dll" />
     <Content Include="External DLLs\Wox.Infrastructure.dll" />
     <Content Include="External DLLs\Wox.Plugin.dll" />
-    <Content Include="Resources\SwiftTweet Demo compressed.gif" />
-    <Content Include="Resources\SwiftTweet Demo uncompressed.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
