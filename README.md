@@ -34,3 +34,9 @@ Installation
 ![EnterPIN](http://i.imgur.com/qJpsOCK.png)
 7. After confirming the popup you have successfully granted access to your Twitter account
 ![AccessGranted](http://i.imgur.com/maXGMWt.png)
+
+Contribute
+=========
+If you are a developer and you would like to contribute to this project feel free to send a pull request to the **Dev branch**. Plase have a look at the [issues page](https://github.com/NCiher/Wox.Plugin.SwiftTweet/issues) to look for bugs or new features where you can help.
+
+Feedback is always welcome!
