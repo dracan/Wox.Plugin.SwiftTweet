@@ -41,6 +41,7 @@ Twitter authorization
 Contribute
 =========
 If you are a developer and you would like to contribute to this project feel free to send a pull request. I recommend to use the "Fork & Pull" model. The typical steps would be:
+
 1. Fork this repository
 2. Make a local clone
 3. Make the changes to your local copy
