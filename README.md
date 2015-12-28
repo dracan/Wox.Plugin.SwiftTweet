@@ -13,6 +13,11 @@ Features
 
 More features will be added in the future. Feel free to create feature requests using the [issues page](https://github.com/NCiher/Wox.Plugin.SwiftTweet/issues).
 
+Keywords / commands
+=========
+1. Send a new tweet `tw tweet [the text you would like to tweet]` 
+2. Search for tweets `tw search [the text/hashtag/user you would like to search on Twitter]` 
+
 Installation
 =========
 1. Install the plugin using the Wox command `wpm install SwiftTweet`
