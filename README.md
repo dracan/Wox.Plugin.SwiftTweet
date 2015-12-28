@@ -40,6 +40,16 @@ Twitter authorization
 
 Contribute
 =========
-If you are a developer and you would like to contribute to this project feel free to send a pull request to the **Dev branch**. Plase have a look at the [issues page](https://github.com/NCiher/Wox.Plugin.SwiftTweet/issues) to look for bugs or new features where you can help.
+If you are a developer and you would like to contribute to this project feel free to send a pull request. I recommend to use the "Fork & Pull" model. The typical steps would be:
+
+1. Fork this repository
+2. Make a local clone
+3. Make the changes to your local copy
+4. Commit the changes
+5. Test your changes
+6. Push the changes to your forked repository
+7. Create a pull request from your GitHub fork
+
+Plase have a look at the [issues page](https://github.com/NCiher/Wox.Plugin.SwiftTweet/issues) to look for bugs or new features where you can help.
 
 Feedback is always welcome!
