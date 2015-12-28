@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ApplicationLogo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DBTek.Crypto, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\DBTek.Crypto.2.1.0\lib\net35\DBTek.Crypto.dll</HintPath>
@@ -126,6 +129,8 @@
     <Content Include="External DLLs\TWHelper.dll" />
     <Content Include="External DLLs\Wox.Infrastructure.dll" />
     <Content Include="External DLLs\Wox.Plugin.dll" />
+    <Content Include="Resources\ApplicationLogo.ico" />
+    <Content Include="Resources\ApplicationLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
