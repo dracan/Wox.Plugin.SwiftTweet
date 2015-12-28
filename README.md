@@ -34,3 +34,9 @@ Installation
 ![EnterPIN](http://i.imgur.com/qJpsOCK.png)
 7. After confirming the popup you have successfully granted access to your Twitter account
 ![AccessGranted](http://i.imgur.com/maXGMWt.png)
+
+Contribute
+=========
+If you are a developer and would you would like to contibute to this projekt feel free to send a pull request to the Dev branch.
+
+Feedback is always welcome!
