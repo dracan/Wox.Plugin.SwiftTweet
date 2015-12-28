@@ -37,6 +37,6 @@ Installation
 
 Contribute
 =========
-If you are a developer and would you would like to contibute to this projekt feel free to send a pull request to the Dev branch.
+If you are a developer and you would like to contribute to this project feel free to send a pull request to the **Dev branch**. Plase have a look at the [issues page](https://github.com/NCiher/Wox.Plugin.SwiftTweet/issues) to look for bugs or new features where you can help.
 
 Feedback is always welcome!
