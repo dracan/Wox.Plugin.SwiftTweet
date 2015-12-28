@@ -12,8 +12,3 @@ Features
 2. Search for tweets and open them with one keypress from the result list of Wox
 
 More features will be added in the future. Feel free to create feature requests using the [issues page](https://github.com/NCiher/Wox.Plugin.SwiftTweet/issues).
-
-Installation
-=========
-
-tbd
