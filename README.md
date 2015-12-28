@@ -1,3 +1,6 @@
+[![Issue Stats](http://issuestats.com/github/NCiher/Wox.Plugin.SwiftTweet/badge/pr)](http://issuestats.com/github/NCiher/Wox.Plugin.SwiftTweet)
+[![Issue Stats](http://issuestats.com/github/NCiher/Wox.Plugin.SwiftTweet/badge/issue)](http://issuestats.com/github/NCiher/Wox.Plugin.SwiftTweet)
+
 # Wox.Plugin.SwiftTweet 
 A Twitter Plugin for [Wox](https://github.com/Wox-launcher/Wox)
 
