@@ -27,5 +27,5 @@ Installation
 ![TwitterPIN](http://i.imgur.com/MTJFSXP.png)
 6. Copy this PIN code and switch back to wox where you can enter the PIN code
 ![EnterPIN](http://i.imgur.com/qJpsOCK.png)
-7. After confirming the popup you have successfully granted access to your Twitter account for SwiftTweet
+7. After confirming the popup you have successfully granted access to your Twitter account
 ![AccessGranted](http://i.imgur.com/maXGMWt.png)
