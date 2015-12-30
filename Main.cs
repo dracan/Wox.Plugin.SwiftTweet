@@ -10,7 +10,6 @@ namespace Wox.Plugin.SwiftTweet
     public class Main : IPlugin, ISettingProvider
     {
         private Twitter twitter;
-        private Version woxVersion;
         private const string twitterIconPath = "Resources\\TwitterLogo_#55acee.png";
         private const int splitTweetPos = 80;
 
@@ -19,10 +18,6 @@ namespace Wox.Plugin.SwiftTweet
             tweet = 1,
             search = 2
         }
-
-        public enum dependentFeatures
-        {
-        }
         
         #region "Prerequisites"
         public void Init(PluginInitContext context)
@@ -30,49 +25,6 @@ namespace Wox.Plugin.SwiftTweet
             try
             {
                 getTwitterAccess();
-                woxVersion = getWoxVersion();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Retrieves the version of Wox
-        /// </summary>
-        /// <returns>Version of Wox</returns>
-        private Version getWoxVersion()
-        {
-            try
-            {
-                return System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Check wether a feature is supported by Wox version running this plugin
-        /// </summary>
-        /// <param name="feature">Feature to check</param>
-        /// <returns>True if the feature is supported by Wox otherwise false</returns>
-        public bool isDependentFeatureSupported(dependentFeatures feature)
-        {
-            bool isSupported;
-            try
-            {
-                isSupported = false;
-                switch (feature)
-                {
-                    // Implement switch for a dependent feature
-                    default:
-                        break;
-                }
-
-                return isSupported;
             }
             catch (Exception)
             {
@@ -166,8 +118,8 @@ namespace Wox.Plugin.SwiftTweet
                                     results = buildSearchResult(query.SecondToEndSearch); // Search for tweets
                                 }
                                 break;
-                            default:
 
+                            default:
                                 break;
                         }
                     }
