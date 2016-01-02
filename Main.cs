@@ -24,7 +24,14 @@ namespace Wox.Plugin.SwiftTweet
         {
             try
             {
+                // init Twitter access
                 getTwitterAccess();
+                // perform update check
+                if (GitHubUpdate.updateAvailable() == true)
+                {
+                    context.API.ShowMsg("Update for SwiftTweet plugin available", "Use \"wpm uninstall SwiftTweet\" and \"wpm install SwiftTweet\"", twitterIconPath);
+                }
+                
             }
             catch (Exception)
             {
