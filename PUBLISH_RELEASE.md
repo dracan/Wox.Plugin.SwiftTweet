@@ -7,7 +7,8 @@
 5. Upload the .wox-file to http://www.getwox.com/#plugin/63/edit
 6. Commit changes to the corresponding GitHub branch
 7. Create and confirm the pull request to the master branch
-8. Optional: Delete the corresponding GitHub branch
+8. *Optional:* Delete the corresponding GitHub branch
 9. Create a new GitHub release: https://github.com/NCiher/Wox.Plugin.SwiftTweet/releases
 10. Describe the change in the GitHub release
 11. Upload the .wox-file to the GitHub release
+12. *Optional:* Add new features to the README.md
