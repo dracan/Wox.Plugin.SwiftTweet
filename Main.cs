@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Controls;
 using TweetSharp;
 
@@ -18,12 +19,14 @@ namespace Wox.Plugin.SwiftTweet
             tweet = 1,
             search = 2
         }
-        
+
         #region "Prerequisites"
         public void Init(PluginInitContext context)
         {
             try
             {
+                // init cache
+                TwitterImage.initCacheFolder();
                 // init Twitter access
                 getTwitterAccess();
                 // perform update check
@@ -31,7 +34,7 @@ namespace Wox.Plugin.SwiftTweet
                 {
                     context.API.ShowMsg("Update for SwiftTweet plugin available", "Use \"wpm uninstall SwiftTweet\" and \"wpm install SwiftTweet\"", twitterIconPath);
                 }
-                
+
             }
             catch (Exception)
             {
@@ -135,7 +138,7 @@ namespace Wox.Plugin.SwiftTweet
                         // No valid command
                         result = new Result("Twitter commands: " + getConcValidCommands(), twitterIconPath, "Use one of the following commands: " + getConcValidCommands());
                         results.Add(result);
-                    }                      
+                    }
                 }
                 else
                 {
@@ -209,6 +212,12 @@ namespace Wox.Plugin.SwiftTweet
                 searchResults = twitter.search(query);
                 if (searchResults != null)
                 {
+                    // handle image cache
+                    foreach (TwitterStatus twitterStatus in searchResults)
+                    {
+                        TwitterImage.cacheUserImage(twitterStatus.Author.ProfileImageUrl);
+                    }
+
                     // process results
                     foreach (TwitterStatus twitterStatus in searchResults)
                     {
@@ -226,7 +235,7 @@ namespace Wox.Plugin.SwiftTweet
                         // build up the result entry
                         result = new Result
                         {
-                            IcoPath = twitterIconPath,
+                            IcoPath = TwitterImage.getCompleteCachePath(twitterStatus.Author.ProfileImageUrl),
                             Title = text,
                             SubTitle = textEnd + twitterStatus.User.Name + " | @" + twitterStatus.User.ScreenName + " | " + twitterStatus.CreatedDate.ToString(),
                             Action = (c) =>
