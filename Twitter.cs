@@ -219,6 +219,29 @@ namespace Wox.Plugin.SwiftTweet
         }
 
         /// <summary>
+        /// Returns the Twitter service response
+        /// </summary>
+        /// <returns>Twitter service response</returns>
+        public TwitterResponse getServiceResponse()
+        {
+            TwitterResponse response;
+            try
+            {
+                response = null;
+                if (service != null)
+                {
+                    response = service.Response;
+                }
+
+                return response;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Checks if an internet connection is available
         /// </summary>
         /// <returns>True if internet is available otherwise false</returns>

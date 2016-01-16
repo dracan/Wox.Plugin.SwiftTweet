@@ -205,6 +205,12 @@ namespace Wox.Plugin.SwiftTweet
             try
             {
                 results = new List<Result>();
+
+                /*if (twitter.getServiceResponse().Response.)
+                {
+
+                }*/
+
                 // execute search
                 searchResults = twitter.search(query);
                 if (searchResults != null)
