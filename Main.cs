@@ -206,10 +206,17 @@ namespace Wox.Plugin.SwiftTweet
             {
                 results = new List<Result>();
 
-                /*if (twitter.getServiceResponse().Response.)
+                // check for errors from twitter for example rate limit exceeded
+                if (twitter.getServiceResponse().Error != null)
                 {
+                    result = new Result
+                    {
+                        IcoPath = twitterIconPath,
+                        Title = "Twitter response error: " + twitter.getServiceResponse().Error.ToString()
+                    };
 
-                }*/
+                    results.Add(result);
+                }
 
                 // execute search
                 searchResults = twitter.search(query);
