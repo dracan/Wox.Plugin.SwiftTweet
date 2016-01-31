@@ -174,8 +174,8 @@ namespace Wox.Plugin.SwiftTweet
                 result = new Result
                 {
                     IcoPath = twitterIconPath,
-                    Title = "Send tweet",
-                    SubTitle = "Tweet \"" + query + "\"",
+                    Title = "Tweet: " + query,
+                    SubTitle = "Remaining: " + ( 140 - query.Length ) + ". Press Enter to send tweet",
                     Action = (c) =>
                     {
                         return twitter.tweet(query); // call the helper method to send the tweet

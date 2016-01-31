@@ -32,7 +32,7 @@ namespace Wox.Plugin.SwiftTweet
                 InitializeComponent();
                 checkTwitterAuth();
 
-                //Load seetings
+                //Load settings
                 txtMaxSearchResults.Text = Properties.Settings.Default.twitterMaxSearchResults.ToString();
             }
             catch (Exception e)
