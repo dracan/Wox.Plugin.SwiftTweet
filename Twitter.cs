@@ -175,11 +175,7 @@ namespace Wox.Plugin.SwiftTweet
                 {
                     options = new SearchOptions();
                     options.Q = query;
-<<<<<<< HEAD
                     options.Count = Properties.Settings.Default.twitterMaxSearchResults;
-=======
-                    options.Count = 10;
->>>>>>> refs/remotes/origin/Search-result-images-#3
                     searchResult = service.Search(options);
                     if (searchResult != null)
                     {
@@ -223,7 +219,6 @@ namespace Wox.Plugin.SwiftTweet
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Returns the Twitter service response
         /// </summary>
         /// <returns>Twitter service response</returns>
@@ -247,8 +242,6 @@ namespace Wox.Plugin.SwiftTweet
         }
 
         /// <summary>
-=======
->>>>>>> refs/remotes/origin/Search-result-images-#3
         /// Checks if an internet connection is available
         /// </summary>
         /// <returns>True if internet is available otherwise false</returns>
