@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+<<<<<<< HEAD
+=======
+using System.Threading;
+>>>>>>> refs/remotes/origin/Search-result-images-#3
 using System.Windows.Controls;
 using TweetSharp;
 
@@ -18,12 +22,21 @@ namespace Wox.Plugin.SwiftTweet
             tweet = 1,
             search = 2
         }
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> refs/remotes/origin/Search-result-images-#3
         #region "Prerequisites"
         public void Init(PluginInitContext context)
         {
             try
             {
+<<<<<<< HEAD
+=======
+                // init cache
+                TwitterImage.initCacheFolder();
+>>>>>>> refs/remotes/origin/Search-result-images-#3
                 // init Twitter access
                 getTwitterAccess();
                 // perform update check
@@ -31,7 +44,11 @@ namespace Wox.Plugin.SwiftTweet
                 {
                     context.API.ShowMsg("Update for SwiftTweet plugin available", "Use \"wpm uninstall SwiftTweet\" and \"wpm install SwiftTweet\"", twitterIconPath);
                 }
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> refs/remotes/origin/Search-result-images-#3
             }
             catch (Exception)
             {
@@ -135,7 +152,11 @@ namespace Wox.Plugin.SwiftTweet
                         // No valid command
                         result = new Result("Twitter commands: " + getConcValidCommands(), twitterIconPath, "Use one of the following commands: " + getConcValidCommands());
                         results.Add(result);
+<<<<<<< HEAD
                     }                      
+=======
+                    }
+>>>>>>> refs/remotes/origin/Search-result-images-#3
                 }
                 else
                 {
@@ -174,8 +195,13 @@ namespace Wox.Plugin.SwiftTweet
                 result = new Result
                 {
                     IcoPath = twitterIconPath,
+<<<<<<< HEAD
                     Title = "Tweet: " + query,
                     SubTitle = "Remaining: " + ( 140 - query.Length ) + ". Press Enter to send tweet",
+=======
+                    Title = "Send tweet",
+                    SubTitle = "Tweet \"" + query + "\"",
+>>>>>>> refs/remotes/origin/Search-result-images-#3
                     Action = (c) =>
                     {
                         return twitter.tweet(query); // call the helper method to send the tweet
@@ -205,6 +231,7 @@ namespace Wox.Plugin.SwiftTweet
             try
             {
                 results = new List<Result>();
+<<<<<<< HEAD
 
                 // check for errors from twitter for example rate limit exceeded
                 if (twitter.getServiceResponse().Error != null)
@@ -218,10 +245,21 @@ namespace Wox.Plugin.SwiftTweet
                     results.Add(result);
                 }
 
+=======
+>>>>>>> refs/remotes/origin/Search-result-images-#3
                 // execute search
                 searchResults = twitter.search(query);
                 if (searchResults != null)
                 {
+<<<<<<< HEAD
+=======
+                    // handle image cache
+                    foreach (TwitterStatus twitterStatus in searchResults)
+                    {
+                        TwitterImage.cacheUserImage(twitterStatus.Author.ProfileImageUrl);
+                    }
+
+>>>>>>> refs/remotes/origin/Search-result-images-#3
                     // process results
                     foreach (TwitterStatus twitterStatus in searchResults)
                     {
@@ -239,7 +277,11 @@ namespace Wox.Plugin.SwiftTweet
                         // build up the result entry
                         result = new Result
                         {
+<<<<<<< HEAD
                             IcoPath = twitterIconPath,
+=======
+                            IcoPath = TwitterImage.getCompleteCachePath(twitterStatus.Author.ProfileImageUrl),
+>>>>>>> refs/remotes/origin/Search-result-images-#3
                             Title = text,
                             SubTitle = textEnd + twitterStatus.User.Name + " | @" + twitterStatus.User.ScreenName + " | " + twitterStatus.CreatedDate.ToString(),
                             Action = (c) =>
