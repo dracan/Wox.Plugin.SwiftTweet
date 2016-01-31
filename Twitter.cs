@@ -175,7 +175,7 @@ namespace Wox.Plugin.SwiftTweet
                 {
                     options = new SearchOptions();
                     options.Q = query;
-                    options.Count = 30;
+                    options.Count = Properties.Settings.Default.twitterMaxSearchResults;
                     searchResult = service.Search(options);
                     if (searchResult != null)
                     {
@@ -211,6 +211,29 @@ namespace Wox.Plugin.SwiftTweet
                 }
                                 
                 return success;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Returns the Twitter service response
+        /// </summary>
+        /// <returns>Twitter service response</returns>
+        public TwitterResponse getServiceResponse()
+        {
+            TwitterResponse response;
+            try
+            {
+                response = null;
+                if (service != null)
+                {
+                    response = service.Response;
+                }
+
+                return response;
             }
             catch (Exception)
             {

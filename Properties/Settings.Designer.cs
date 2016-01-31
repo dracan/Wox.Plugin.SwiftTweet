@@ -46,5 +46,17 @@ namespace Wox.Plugin.SwiftTweet.Properties {
                 this["accessTokenSecret"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int twitterMaxSearchResults {
+            get {
+                return ((int)(this["twitterMaxSearchResults"]));
+            }
+            set {
+                this["twitterMaxSearchResults"] = value;
+            }
+        }
     }
 }

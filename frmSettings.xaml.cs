@@ -31,6 +31,9 @@ namespace Wox.Plugin.SwiftTweet
             {
                 InitializeComponent();
                 checkTwitterAuth();
+
+                //Load settings
+                txtMaxSearchResults.Text = Properties.Settings.Default.twitterMaxSearchResults.ToString();
             }
             catch (Exception e)
             {
@@ -145,6 +148,50 @@ namespace Wox.Plugin.SwiftTweet
             try
             {
                 Process.Start(re.Uri.AbsoluteUri);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Check text input --> Only numbers allowed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ev"></param>
+        private void txtMaxSearchResults_PreviewTextInput(object sender, TextCompositionEventArgs ev)
+        {
+            try
+            {
+                if (char.IsDigit(ev.Text, ev.Text.Length -1) == false)
+                {
+                    ev.Handled = true;
+                }
+                else if (txtMaxSearchResults.Text.Length == 2)
+                {
+                    ev.Handled = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Save settings
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void grdMain_Unloaded(object sender, RoutedEventArgs ev)
+        {
+            try
+            {
+                Properties.Settings.Default.twitterMaxSearchResults = Convert.ToInt32(txtMaxSearchResults.Text);
+                Properties.Settings.Default.Save();
             }
             catch (Exception e)
             {

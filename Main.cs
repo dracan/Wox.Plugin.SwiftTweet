@@ -174,8 +174,8 @@ namespace Wox.Plugin.SwiftTweet
                 result = new Result
                 {
                     IcoPath = twitterIconPath,
-                    Title = "Send tweet",
-                    SubTitle = "Tweet \"" + query + "\"",
+                    Title = "Tweet: " + query,
+                    SubTitle = "Remaining: " + ( 140 - query.Length ) + ". Press Enter to send tweet",
                     Action = (c) =>
                     {
                         return twitter.tweet(query); // call the helper method to send the tweet
@@ -205,6 +205,19 @@ namespace Wox.Plugin.SwiftTweet
             try
             {
                 results = new List<Result>();
+
+                // check for errors from twitter for example rate limit exceeded
+                if (twitter.getServiceResponse().Error != null)
+                {
+                    result = new Result
+                    {
+                        IcoPath = twitterIconPath,
+                        Title = "Twitter response error: " + twitter.getServiceResponse().Error.ToString()
+                    };
+
+                    results.Add(result);
+                }
+
                 // execute search
                 searchResults = twitter.search(query);
                 if (searchResults != null)
