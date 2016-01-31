@@ -175,7 +175,7 @@ namespace Wox.Plugin.SwiftTweet
                 {
                     options = new SearchOptions();
                     options.Q = query;
-                    options.Count = 30;
+                    options.Count = Properties.Settings.Default.twitterMaxSearchResults;
                     searchResult = service.Search(options);
                     if (searchResult != null)
                     {

@@ -5,23 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wox.Plugin.SwiftTweet"
              mc:Ignorable="d" 
-             d:DesignHeight="111" d:DesignWidth="492">
-    <Grid>
+             d:DesignHeight="339" d:DesignWidth="492">
+    <Grid x:Name="grdMain" Unloaded="grdMain_Unloaded">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="26*"/>
         </Grid.ColumnDefinitions>
-
-        <Button x:Name="btnAuthorise" Content="Authenticate" Margin="10,40.96,0,0" VerticalAlignment="Top" Click="btnAuthorise_onClick" HorizontalAlignment="Left" Width="87"/>
-        <Label x:Name="lblAuthStatus" Content="Twitter authorisation status:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblAuthStatusValue" Content="" Margin="166.697,10,10,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblProjektURL" Content="Project website:" Margin="10,77,0,8.04" HorizontalAlignment="Left" Width="96"/>
-        <TextBlock x:Name="txbProjectURL" Margin="106,82,0,10" HorizontalAlignment="Left" Width="137">           
+        <Label x:Name="lblProjektURL" Content="Project website:" Margin="10,5,0,0" HorizontalAlignment="Left" Width="96" Height="25.96" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txbProjectURL" Margin="111,10,0,0" HorizontalAlignment="Left" Width="137" Height="19" VerticalAlignment="Top" Grid.ColumnSpan="2">           
     <Hyperlink NavigateUri="https://github.com/NCiher/Wox.Plugin.SwiftTweet" RequestNavigate="txbProjectURL_onRequestNavigate">
         <Hyperlink.Inlines>
         <Run Text="SwiftTweet on GitHub"></Run>
             </Hyperlink.Inlines>
     </Hyperlink>
         </TextBlock>
+        <GroupBox x:Name="gbxTwitterSettings" Header="Twitter settings" Margin="10,35.96,10,10" Grid.ColumnSpan="2">
+            <Grid Margin="10,10,-2,-12.96">
+                <Button x:Name="btnAuthorise" Content="Authenticate" Margin="10,40.96,0,0" VerticalAlignment="Top" Click="btnAuthorise_onClick" HorizontalAlignment="Left" Width="87"/>
+                <Label x:Name="lblAuthStatus" Content="Twitter authorisation status:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblAuthStatusValue" Content="" Margin="171.037,10,10,0" VerticalAlignment="Top"/>
+                <Label x:Name="lblMaxSearchResults" Content="Max. search results:" HorizontalAlignment="Left" Margin="10,80.04,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtMaxSearchResults" HorizontalAlignment="Left" Height="21.96" Margin="127.547,84.04,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="38.49" PreviewTextInput="txtMaxSearchResults_PreviewTextInput"/>
+            </Grid>
+        </GroupBox>
 
 
     </Grid>
